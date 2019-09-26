@@ -648,7 +648,7 @@ class WhoisCa(WhoisEntry):
         'registrant_number':              'Registry Registrant ID: *(.+)',
         'admin_name':                     'Admin Name: *(.+)',
         'domain_status':                  'Domain status: *(.+)',
-        'emails':                         'Email: *(.+)',
+        'email':                          'Email: *(.+)',
         'updated_date':                   'Updated Date: *(.+)',
         'creation_date':                  'Creation Date: *(.+)',
         'expiration_date':                'Expiry Date: *(.+)',
@@ -787,10 +787,10 @@ class WhoisFi(WhoisEntry):
     """
     regex = {
         'domain_name':                    'domain\.*: *([\S]+)',
-        'name':                           'Holder\s*name\.*:([\S\ ]+)',
-        'address':                        '[Holder\w\W]address\.*: ([\S\ ]+)',
-        'phone':                          'Holder[\s\w\W]+phone\.*: ([\S]+)',
-        'email':                          'holder email\.*: *([\S\ ]+)',
+        'registrant_name':                'Holder\s*name\.*:([\S\ ]+)',
+        'registrant_address':             '[Holder\w\W]address\.*: ([\S\ ]+)',
+        'registrant_phone':               'Holder[\s\w\W]+phone\.*: ([\S]+)',
+        'registrant_email':               'holder email\.*: *([\S\ ]+)',
         'status':                         'status\.*: *([\S]+)',  # list of statuses
         'creation_date':                  'created\.*: *([\S]+)',
         'updated_date':                   'modified\.*: *([\S]+)',
@@ -900,7 +900,7 @@ class WhoisBr(WhoisEntry):
     """Whois parser for .br domains
     """
     regex = {
-        'domain':                        'domain: *(.+)\n',
+        'domain_name':                   'domain: *(.+)\n',
         'registrant':                    'owner: *([\S ]+)',
         'registrant_id':                 'ownerid: *(.+)',
         'country':                       'country: *(.+)',
@@ -1075,23 +1075,23 @@ class WhoisInfo(WhoisEntry):
     """Whois parser for .info domains
     """
     regex = {
-        'domain_name':      'Domain Name: *(.+)',
-        'registrar':        'Registrar: *(.+)',
-        'whois_server':     'Whois Server: *(.+)',  # empty usually
-        'referral_url':     'Referral URL: *(.+)',  # http url of whois_server: empty usually
-        'updated_date':     'Updated Date: *(.+)',
-        'creation_date':    'Creation Date: *(.+)',
-        'expiration_date':  'Registry Expiry Date: *(.+)',
-        'name_servers':     'Name Server: *(.+)',  # list of name servers
-        'status':           'Status: *(.+)',  # list of statuses
-        'emails':           EMAIL_REGEX,  # list of email addresses
-        'name':             'Registrant Name: *(.+)',
-        'org':              'Registrant Organization: *(.+)',
-        'address':          'Registrant Street: *(.+)',
-        'city':             'Registrant City: *(.+)',
-        'state':            'Registrant State/Province: *(.+)',
-        'zipcode':          'Registrant Postal Code: *(.+)',
-        'country':          'Registrant Country: *(.+)',
+        'domain_name':         'Domain Name: *(.+)',
+        'registrar':           'Registrar: *(.+)',
+        'whois_server':        'Whois Server: *(.+)',  # empty usually
+        'referral_url':        'Referral URL: *(.+)',  # http url of whois_server: empty usually
+        'updated_date':        'Updated Date: *(.+)',
+        'creation_date':       'Creation Date: *(.+)',
+        'expiration_date':     'Registry Expiry Date: *(.+)',
+        'name_servers':        'Name Server: *(.+)',  # list of name servers
+        'status':              'Status: *(.+)',  # list of statuses
+        'email':               EMAIL_REGEX,  # list of email addresses
+        'registrant_name':     'Registrant Name: *(.+)',
+        'registrant_org':      'Registrant Organization: *(.+)',
+        'registrant_address':  'Registrant Street: *(.+)',
+        'registrant_city':     'Registrant City: *(.+)',
+        'registrant_state':    'Registrant State/Province: *(.+)',
+        'registrant_zipcode':  'Registrant Postal Code: *(.+)',
+        'registrant_country':  'Registrant Country: *(.+)',
     }
 
     def __init__(self, domain, text):
@@ -1137,7 +1137,7 @@ class WhoisClub(WhoisEntry):
         'registrant_postal_code':         'Registrant Postal Code: *(.+)',
         'registrant_country':             'Registrant Country: *(.+)',
         'registrant_country_code':        'Registrant Country Code: *(.+)',
-        'registrant_phone_number':        'Registrant Phone Number: *(.+)',
+        'registrant_phone':               'Registrant Phone Number: *(.+)',
         'registrant_email':               'Registrant Email: *(.+)',
         'registrant_application_purpose': 'Registrant Application Purpose: *(.+)',
         'registrant_nexus_category':      'Registrant Nexus Category: *(.+)',
@@ -1227,7 +1227,7 @@ class WhoisBiz(WhoisEntry):
     """
     regex = {
         'domain_name':                    'Domain Name: *(.+)',
-        'domain__id':                     'Domain ID: *(.+)',
+        'domain_id':                      'Domain ID: *(.+)',
         'registrar':                      'Registrar: *(.+)',
         'registrar_url':                  'Registrar URL: *(.+)',
         'registrar_id':                   'Registrar IANA ID: *(.+)',
@@ -1242,7 +1242,7 @@ class WhoisBiz(WhoisEntry):
         'registrant_postal_code':         'Registrant Postal Code: *(.+)',
         'registrant_country':             'Registrant Country: *(.+)',
         'registrant_country_code':        'Registrant Country Code: *(.+)',
-        'registrant_phone_number':        'Registrant Phone: *(.+)',
+        'registrant_phone':               'Registrant Phone: *(.+)',
         'registrant_email':               'Registrant Email: *(.+)',
         'admin_id':                       'Registry Admin ID: *(.+)',
         'admin_name':                     'Admin Name: *(.+)',
@@ -1293,7 +1293,7 @@ class WhoisKg(WhoisEntry):
         'registrar':                      'Domain support: \s*(.+)',
         'registrant_name':                'Name: *(.+)',
         'registrant_address1':            'Address: *(.+)',
-        'registrant_phone_number':        'phone: *(.+)',
+        'registrant_phone':               'phone: *(.+)',
         'registrant_email':               'Email: *(.+)',
         # # list of name servers
         'name_servers':                   'Name servers in the listed order: *([\d\w\.\s]+)',
@@ -1486,7 +1486,7 @@ class WhoisIt(WhoisEntry):
         'status':                         'Status: *(.+)',  # list of statuses
         'name_servers':                   'Nameservers[\s]((?:.+\n)*)',  # servers in one string sep by \n
 
-        'registrant_organization':        '(?<=Registrant)[\s\S]*?Organization:(.*)',
+        'registrant_org':                 '(?<=Registrant)[\s\S]*?Organization:(.*)',
         'registrant_address':             '(?<=Registrant)[\s\S]*?Address:(.*)',
 
         'admin_address':                  '(?<=Admin Contact)[\s\S]*?Address:(.*)',
@@ -2490,13 +2490,13 @@ class WhoisDo(WhoisEntry):
         'status':               'Domain Status: *(.+)',  # list of statuses
         'registrant_id':        'Registrant ID: *(.+)',
         'registrant_name':      'Registrant Name: *(.+)',
-        'registrant_organization': 'Registrant Organization: *(.+)',
+        'registrant_org':       'Registrant Organization: *(.+)',
         'registrant_address':   'Registrant Street: *(.+)',
         'registrant_city':      'Registrant City: *(.+)',
         'registrant_state_province': 'Registrant State/Province: *(.+)',
         'registrant_postal_code': 'Registrant Postal Code: *(.+)',
-        'registrant_country': 'Registrant Country: *(.+)',
-        'registrant_phone_number': 'Registrant Phone: *(.+)',
+        'registrant_country':   'Registrant Country: *(.+)',
+        'registrant_phone':     'Registrant Phone: *(.+)',
         'registrant_email':     'Registrant Email: *(.+)',
         'admin_id':             'Admin ID: *(.+)',
         'admin_name':           'Admin Name: *(.+)',
